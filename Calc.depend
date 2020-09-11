@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1599857801 source:c:\users\nacho\desktop\calc\main.c
+	<stdio.h>
+	<stdlib.h>
+	"maths.c"
+	"menu.c"
+
+1599852812 c:\users\nacho\desktop\calc\maths.c
+
+1599852835 c:\users\nacho\desktop\calc\menu.c
+
