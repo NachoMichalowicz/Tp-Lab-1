@@ -4,7 +4,6 @@
 #include <string.h>
 
 #include "ArrayEmployees.h"
-#include "ArrayEmployees.c"
 
 #define TAM 51
 
@@ -227,6 +226,7 @@ void baja(Employee* employeeList, int* size)
     }
     else
     {
+        printf("\nEmpleado removido exitosamente!");
         *size = newSize;
     }
 }

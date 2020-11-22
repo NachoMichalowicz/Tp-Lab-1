@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ArrayEmployees.h"
 
 int initEmployees(Employee* list, int len)
@@ -14,7 +15,6 @@ int initEmployees(Employee* list, int len)
         }
         return 0;
     }
-
 
 }
 
@@ -43,6 +43,7 @@ int findEmployeeById(Employee* list, int len, int id)
     {
         if (list[i].id == id)
         {
+            printf("\nID: %d", i);
             return i;
         }
     }
@@ -55,20 +56,26 @@ int removeEmployee(Employee* list, int len, int id)
     empleadoVacio.isEmpty = 1;
     int idActual = findEmployeeById(list, len, id);
 
-    if (list[idActual].isEmpty)
+    if (idActual != -1)
     {
-        return -1;
+       if (list[idActual].isEmpty)
+        {
+            return -1;
+        }
+        else
+        {
+            list[idActual] = empleadoVacio;
+            for (int i = idActual+1; i < len+1; i++)
+            {
+                list[i-1] = list[i];
+            }
+            return 0;
+        }
     }
     else
     {
-        list[idActual] = empleadoVacio;
-        for (int i = idActual+1; i < len+1; i++)
-        {
-            list[i-1] = list[i];
-        }
-        return 0;
+        return -1;
     }
-
 }
 
 int sortEmployee(Employee* list, int len, int order)
@@ -134,20 +141,18 @@ int printEmployees(Employee* list, int length)
     else
     {
         printf("\n\n----------- Empleados -----------");
-
+        printf("\n|       APELLIDO       |    NOMBRE    |       SALARIO     |       SECTOR      |  ID  |");
+        printf("\n--------------------------------------");
         sortEmployee(list, length, 0);
 
         for (int i = 0; i < length+1; i++)
         {
-            printf("\nNombre del empleado: %s %s", list[i].name, list[i].lastName);
-            printf("\nSalario del empleado: %.2f", list[i].salary);
-            printf("\nSector del empleado: %d", list[i].sector);
-            printf("\nId del empleado: %d\n", list[i].id);
-
+            printf("\n|APELLIDO: %s  |NOMBRE: %s  |SALARIO: %.2f |SECTOR: %d |ID: %d  |", list[i].lastName, list[i].name, list[i].salary, list[i].sector, list[i].id);
             sumaSalarios += list[i].salary;
         }
+        printf("\n-----------------------------------------------------------------------");
         promedioSalarios = sumaSalarios / (length+1);
-        printf("\nSuma de salarios: %.2f", sumaSalarios);
+        printf("\n\nSuma de salarios: %.2f", sumaSalarios);
         printf("\nPromedio de salarios: %.2f", promedioSalarios);
 
         for (int i = 0; i < length+1; i++)
